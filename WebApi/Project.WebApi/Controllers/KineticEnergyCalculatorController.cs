@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.WebApi.Models;
+using Project.WebApi.Models.Common;
 using Project.WebApi.Services;
 using System.Net.Mime;
 
@@ -32,7 +33,7 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(InvalidModelStateModel), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(KineticEnergyCalculatorViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> CalculateAsync([FromBody] KineticEnergyCalculatorModel request, CancellationToken ct)
         {
