@@ -1,1 +1,2 @@
-# strongPoint
+# Assignment
+StrongPoint assignment
