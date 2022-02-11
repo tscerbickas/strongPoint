@@ -33,6 +33,7 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(InvalidModelStateModel), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(KineticEnergyCalculatorViewModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> CalculateAsync([FromBody] KineticEnergyCalculatorModel request, CancellationToken ct)

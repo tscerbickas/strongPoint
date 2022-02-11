@@ -2,6 +2,6 @@
 {
     public static class Const
     {
-        public static readonly string UniqueKeyName = "UniqueIdentifier";
+        public static readonly string UniqueIdentifierKey = "UniqueIdentifier";
     }
 }

@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.WebApi.DataAccess;
-using Project.WebApi.DataAccess.Dto;
 using Project.WebApi.DataAccess.Entities;
+using Project.WebApi.Models;
 
 namespace Project.WebApi.Services
 {
     public interface ICalculationHistoryService
     {
-        Task<List<CalculationHistoryDto>> GetAsync(Guid uniqueIdentifier, int itemCount, CancellationToken ct);
+        Task<List<CalculationHistoryItemViewModel>> GetAsync(Guid uniqueIdentifier, int itemCount, CancellationToken ct);
         Task AddAsync(double mass, double velocity, double kineticEnergy, Guid impactResultId, Guid uniqueIdentifier, CancellationToken ct = default);
     }
 
@@ -33,7 +33,7 @@ namespace Project.WebApi.Services
             await _context.SaveChangesAsync(ct);
         }
 
-        public async Task<List<CalculationHistoryDto>> GetAsync(Guid uniqueIdentifier, int itemCount, CancellationToken ct)
+        public async Task<List<CalculationHistoryItemViewModel>> GetAsync(Guid uniqueIdentifier, int itemCount, CancellationToken ct)
         {
             _logger.LogInformation("Retrieving lastest {itemCount} items from CalculationHistory by uniqueIndentifier:{uid}", itemCount, uniqueIdentifier);
 
@@ -43,7 +43,7 @@ namespace Project.WebApi.Services
                 .OrderByDescending(c => c.ModifiedDate)
                 .Take(itemCount)
                 .AsNoTracking()
-                .Select(c => new CalculationHistoryDto
+                .Select(c => new CalculationHistoryItemViewModel
                 {
                     Id = c.Id,
                     KineticEnergy = c.KineticEnergy,

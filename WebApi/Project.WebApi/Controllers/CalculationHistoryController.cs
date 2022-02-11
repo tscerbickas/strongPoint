@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Project.WebApi.DataAccess.Dto;
+using Project.WebApi.Models;
 using Project.WebApi.Models.Common;
 using Project.WebApi.Services;
 using System.Net.Mime;
@@ -21,7 +21,8 @@ namespace Project.WebApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(List<CalculationHistoryDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(List<CalculationHistoryItemViewModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAsync(CancellationToken ct)
         {
             const int itemCount = 10;
