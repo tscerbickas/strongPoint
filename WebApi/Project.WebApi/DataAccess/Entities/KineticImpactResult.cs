@@ -1,27 +1,26 @@
-﻿namespace Project.WebApi.DataAccess.Entities
+﻿namespace Project.WebApi.DataAccess.Entities;
+
+public class KineticImpactResult : Entity
 {
-    public class KineticImpactResult : Entity
+    protected KineticImpactResult()
     {
-        protected KineticImpactResult()
-        {
 
-        }
+    }
 
-        public KineticImpactResult(int energy, string description)
-        {
-            NewEntry();
+    public KineticImpactResult(int energy, string description)
+    {
+        NewEntry();
 
-            KineticEnergity = energy;
-            Description = description;
-        }
+        KineticEnergity = energy;
+        Description = description;
+    }
 
-        public int KineticEnergity { get; private set; }
-        public string Description { get; private set; }
+    public int KineticEnergity { get; private set; }
+    public string Description { get; private set; }
 
-        internal void Deconstruct(out Guid id, out string description)
-        {
-            id = Id;
-            description = Description;
-        }
+    internal void Deconstruct(out Guid id, out string description)
+    {
+        id = Id;
+        description = Description;
     }
 }

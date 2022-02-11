@@ -1,36 +1,35 @@
-﻿namespace Project.WebApi.Services
+﻿namespace Project.WebApi.Services;
+
+public interface IKineticEnergyCalculator
 {
-    public interface IKineticEnergyCalculator
+    double Calculate(double mass, double velocity);
+}
+
+public class KineticEnergyCalculator : IKineticEnergyCalculator
+{
+    private readonly ILogger<KineticEnergyCalculator> _logger;
+
+    public KineticEnergyCalculator(ILogger<KineticEnergyCalculator> logger)
     {
-        double Calculate(double mass, double velocity);
+        _logger = logger;
     }
 
-    public class KineticEnergyCalculator : IKineticEnergyCalculator
+    public double Calculate(double mass, double velocity)
     {
-        private readonly ILogger<KineticEnergyCalculator> _logger;
-
-        public KineticEnergyCalculator(ILogger<KineticEnergyCalculator> logger)
+        if (mass <= 0)
         {
-            _logger = logger;
+            throw new ArgumentException($"{nameof(mass)} should be greater than 0");
         }
 
-        public double Calculate(double mass, double velocity)
+        if (velocity <= 0)
         {
-            if (mass <= 0)
-            {
-                throw new ArgumentException($"{nameof(mass)} should be greater than 0");
-            }
-
-            if (velocity <= 0)
-            {
-                throw new ArgumentException($"{nameof(velocity)} should be greater than 0");
-            }
-
-            var kineticEnergy = (mass * Math.Pow(velocity, 2)) * 0.5;
-
-            _logger.LogInformation("Calculated kinetic energy, mass:{mass}, velocity:{velocity}, kineticEnergy:{ke}", mass, velocity, kineticEnergy);
-
-            return kineticEnergy;
+            throw new ArgumentException($"{nameof(velocity)} should be greater than 0");
         }
+
+        var kineticEnergy = (mass * Math.Pow(velocity, 2)) * 0.5;
+
+        _logger.LogInformation("Calculated kinetic energy, mass:{mass}, velocity:{velocity}, kineticEnergy:{ke}", mass, velocity, kineticEnergy);
+
+        return kineticEnergy;
     }
 }

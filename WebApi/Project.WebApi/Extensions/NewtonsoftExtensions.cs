@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace Project.WebApi.Extensions
+namespace Project.WebApi.Extensions;
+
+public static class NewtonsoftExtensions
 {
-    public static class NewtonsoftExtensions
+    public static string ToJson(this object obj)
     {
-        public static string ToJson(this object obj)
-        {
-            return JsonConvert.SerializeObject(obj);
-        }
+        return JsonConvert.SerializeObject(obj);
     }
 }

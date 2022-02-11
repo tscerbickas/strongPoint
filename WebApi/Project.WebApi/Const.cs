@@ -1,7 +1,6 @@
-﻿namespace Project.WebApi
+﻿namespace Project.WebApi;
+
+public static class Const
 {
-    public static class Const
-    {
-        public static readonly string UniqueIdentifierKey = "UniqueIdentifier";
-    }
+    public static readonly string UniqueIdentifierKey = "UniqueIdentifier";
 }
